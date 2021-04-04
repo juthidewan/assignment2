@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 ```
 
 ```{r libraries}
@@ -222,6 +222,7 @@ LC_lasso_tune <-
 
 LC_lasso_tune %>%
   collect_metrics()
+
 ```
 
 <br>
@@ -506,32 +507,32 @@ knn_tune <-
 ### Exercise 16
 
 ```{r}
-set.seed(1211) # for reproducibility
-LC_cv <- vfold_cv(LC_training, v = 5)
+#set.seed(1211) # for reproducibility
+#LC_cv <- vfold_cv(LC_training, v = 5)
 
-ctrl_res <- control_stack_resamples()
+#ctrl_res <- control_stack_resamples()
 
-forest_cv <- forest_fit %>% 
-  fit_resamples(LC_cv, 
-                control = ctrl_res)
+#forest_cv <- forest_fit %>% 
+#  fit_resamples(LC_cv, 
+ #                control = ctrl_res)
 
-LC_stack <- 
-  stacks() %>% 
-  add_candidates(forest_cv) %>% 
-  add_candidates(LC_lasso_tune) %>% 
-  add_candidates(knn_tune)
+#LC_stack <- 
+  #stacks() %>% 
+  #add_candidates(forest_cv) %>% 
+  #add_candidates(LC_lasso_tune) %>% 
+  #add_candidates(knn_tune)
 
-as_tibble(LC_stack)
+#as_tibble(LC_stack)
 
-LC_blend <- 
-  LC_stack %>% 
-  blend_predictions()
+#LC_blend <- 
+#  LC_stack %>% 
+#  blend_predictions()
 
-LC_blend
+#LC_blend
 
-autoplot(LC_blend)
+#autoplot(LC_blend)
 
-autoplot(LC_blend, type = "weights")
+#autoplot(LC_blend, type = "weights")
 ```
 
 
@@ -544,20 +545,19 @@ autoplot(LC_blend, type = "weights")
 17. Fit the final stacked model using `fit_members()`. Apply the model to the test data and report the accuracy and area under the curve. Create a graph of the ROC and construct a confusion matrix. Comment on what you see. Save this final model using the `saveRDS()` function - see the [Use the model](https://advanced-ds-in-r.netlify.app/posts/2021-03-16-ml-review/#use-the-model) section of the `tidymodels` intro. We are going to use the model in the next part. You'll want to save it in the folder where you create your shiny app.
 
 ```{r}
-LC_final_stack <- LC_blend %>% 
-  fit_members()
+#LC_final_stack <- LC_blend %>% 
+#  fit_members()
 
-LC_final_stack
 
-LC_final_stack %>% 
-  predict(new_data = LC_testing, type="prob") %>% 
-  bind_cols(LC_testing) %>% 
-  ggplot(aes(x = Class, 
-             y = .pred_good)) +
-  geom_point(alpha = .5, 
-             size = .5) +
-  labs(x = "Actual Class", 
-       y = "Predicted Class (Good)")
+#LC_final_stack %>% 
+#  predict(new_data = LC_testing, type="prob") %>% 
+#  bind_cols(LC_testing) %>% 
+#  ggplot(aes(x = Class, 
+#             y = .pred_good)) +
+#  geom_point(alpha = .5, 
+#              size = .5) +
+#   labs(x = "Actual Class", 
+#        y = "Predicted Class (Good)")
 ```
 
 
