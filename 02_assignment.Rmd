@@ -430,7 +430,9 @@ cp_profile(explainer_rf, LC_training %>% slice(3), "int_rate")
 ```
 
 
-14. Use `DALEX` functions to create partial dependence plots (with the CP profiles in gray) for the 3-4 most important variables. If the important variables are categorical, you can instead make a CP profile for 3 observations in the dataset and discuss how you could go about constructing a partial dependence plot for a categorical variable (you don't have to code it, but you can if you want an extra challenge). If it ever gives you an error that says, "Error: Can't convert from `VARIABLE` <double> to `VARIABLE` <integer> due to loss of precision", then remove that variable from the list. I seem to have figured out why it's doing that, but I don't know how to fix it yet.
+### Exercise 14
+
+<br> 
 
 ```{r}
 set.seed(494) # since we take a sample of 100 obs
